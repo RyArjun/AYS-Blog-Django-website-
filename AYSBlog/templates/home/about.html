@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+
+    <title>{% block title %}   {% endblock title %}</title>
+    <style>
+.message{
+  width: 1130px;
+  max-width: 85%;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  background: #ddd;
+  border-radius: 40px;
+}
+.column-2 {
+	float: left;
+	
+	padding: 40px;
+	
+	padding-right: 70px;
+	height: 475px;
+	margin:30px;
+	margin-right:30px;
+	margin-bottom: 70px;
+	background-color: #8cfa59;
+	line-height:2;
+	border-radius: 40px;
+}
+    </style>
+  </head>
+  <body>
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand" href="/">AYS Blogsite</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+      
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item {% block homeactive %}  {% endblock homeactive %}">
+              <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item {% block aboutactive %}  {% endblock aboutactive %}" >
+              <a class="nav-link" href="/about">About</a>
+            </li>
+            <li class="nav-item {% block contactactive %}  {% endblock contactactive %} ">
+              <a class="nav-link" href="/contact">  Publish</a>
+            </li>
+            <li class="nav-item {% block blogactive %}  {% endblock blogactive %} ">
+              <a class="nav-link" href="/blog">Blogs</a>
+            </li>
+            
+          </ul>
+          <div class="ml-auto form-inline ">
+          <form method="get" action="/search"class="my-2 my-lg-0 mx-3">
+            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="query" id="query">
+            <button class="btn btn-outline-success my-2 my-sm-0 " type="submit">Search</button>
+            
+          </form>
+
+     
+
+{% if user.is_authenticated %}
+<ul class="navbar-nav mr-2">
+<li class="nav-item dropdown">
+<a class="nav-link dropdown-toggle" href='#' id="navbarDropdown" role="button" data-toggle="dropdown"> Welcome {{request.user}}</a>
+<div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" href="/logout">Logout</a>
+
+        </div>
+      </li>
+      </ul>
+      </div>
+{% else %}
+  <!-- Button to  trigger Login modal -->
+<button type="button" class="btn btn-success mr-2" data-toggle="modal" data-target="#loginModal">
+Login
+</button>
+
+<button type="button" class="btn btn-success mr-2" data-toggle="modal" data-target="#signupModal">
+SignUp
+</button>
+{% endif %}
+
+
+        </div>
+      </nav>
+      {% for message in messages  %}            
+      <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+            <strong>Message : </strong> {{ message }}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+      {% endfor %}    
+      <div class="diffSection" id="about_section">
+        <center><p style="font-size: 50px; padding: 50px">About</p></center>
+        <div class="column-2">
+            <h1> AYS Blogs</h1>
+            <h4>AYS Blog provides its user a platform to share their knowledge , personal views and anything they feel is beneficial for society.</h4><br>
+            <h4>Write a blog,Publish it and let others appreciate your content,add their knowledge to yours to expand the pool of knowledge.</h4><br>
+            <h4>Discuss ,learn and Grow</h4>    
+            <p></p>    
+        </div>
+    </div>
+    <section class="message" id="message">
+        <div class="message">
+          
+          <div class="text">
+            <center><p style="font-size: 50px; padding: 120px">From the creator </p></center>
+            <h1>Arjun Sawant<span></span></h1>
+              <p>An engineering undergrad and Tech-Enthusiast </p><br>
+              <p>You should always be eager to learn. Knowledge gives you a different perspective of looking at the world, a higher, more inclusive and positive one. Your actions always define you.</p>
+            <div class="data">
+            
+            </div>
+          </div>
+        </div>
+      </section>
+
+
+
+</body>
+</html>
